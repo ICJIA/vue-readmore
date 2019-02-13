@@ -35,9 +35,9 @@
             >&nbsp;&nbsp;{{ getWordCount }} total words</span
           >
         </span>
-        <i class="material-icons">
+        <!-- <i class="material-icons">
           {{ this.isCollapsed ? "arrow_drop_down" : "arrow_drop_up" }}
-        </i>
+        </i> -->
       </button>
     </div>
   </div>
@@ -233,7 +233,7 @@ export default {
 </script>
 
 <style>
-@import url("https://fonts.googleapis.com/css?family=Material+Icons");
+/* @import url("https://fonts.googleapis.com/css?family=Material+Icons"); */
 .readMore .section {
   overflow: hidden;
   height: auto;
