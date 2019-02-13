@@ -28,16 +28,16 @@
         :style="{ 'font-size': triggerFontSize + 'px' }"
       >
         <span>
-          {{ this.isCollapsed ? this.readMore : this.readLess }}
+          {{ this.isCollapsed ? this.readMoreText : this.readLessText }}
           <span
             v-if="isCollapsed && showWordCount ? true : false"
             class="wordCount"
             >&nbsp;&nbsp;{{ getWordCount }} total words</span
-          >
-        </span>
-        <!-- <i class="material-icons">
-          {{ this.isCollapsed ? "arrow_drop_down" : "arrow_drop_up" }}
-        </i> -->
+          > </span
+        >&nbsp;
+        <i class="material-icons">
+          {{ this.isCollapsed ? this.readMoreIcon : this.readLessIcon }}
+        </i>
       </button>
     </div>
   </div>
@@ -53,13 +53,21 @@ export default {
       type: String,
       default: "Content Not Defined"
     },
-    readMore: {
+    readMoreText: {
       type: String,
       default: "Read More"
     },
-    readLess: {
+    readLessText: {
       type: String,
       default: "Read Less"
+    },
+    readMoreIcon: {
+      type: String,
+      default: "arrow_drop_down"
+    },
+    readLessIcon: {
+      type: String,
+      default: "arrow_drop_up"
     },
     height: {
       type: Number,
@@ -126,7 +134,9 @@ export default {
      * One way to get a unique id -- the component's own interal id. But folks say to avoid this.
      */
     //this.id = this._uid;
+
     this.id = this.create_UUID();
+
     this.$nextTick(() => {
       let sectionHeight = document.getElementById(this.id).scrollHeight;
       this.sectionHeight = sectionHeight;
@@ -136,6 +146,7 @@ export default {
         this.removeFade = true;
       }
     });
+
     this.handleClicks();
   },
   methods: {
@@ -195,31 +206,39 @@ export default {
     },
     collapseSection(element) {
       let sectionHeight = element.scrollHeight;
+
       let elementTransition = element.style.transition;
       element.style.transition = "";
+
       requestAnimationFrame(() => {
         element.style.height = sectionHeight + "px";
         element.style.transition = elementTransition;
+
         requestAnimationFrame(() => {
           element.style.height = this.height + "px";
         });
       });
+
       element.setAttribute("data-collapsed", "true");
     },
     expandSection(element) {
       let sectionHeight = element.scrollHeight;
+
       element.style.height = sectionHeight + "px";
+
       element.addEventListener(
         "transitionend",
         this.y(callee => {
           element.removeEventListener("transitionend", callee);
         })
       );
+
       element.setAttribute("data-collapsed", "false");
     },
     toggle() {
       let section = document.getElementById(this.id);
       let isCollapsed = section.getAttribute("data-collapsed") === "true";
+
       if (isCollapsed) {
         this.expandSection(section);
         section.setAttribute("data-collapsed", "false");
@@ -243,13 +262,16 @@ export default {
   clear: both;
   margin-top: 0;
 }
+
 .readMore .fade {
   /* border: 1px #d8d8d8 dashed; */
   position: relative;
 }
+
 .readMore .fade:after {
   content: "";
   position: absolute;
+
   z-index: 1;
   bottom: 0;
   left: 0;
@@ -262,18 +284,20 @@ export default {
   width: 100%;
   height: 4em;
 }
+
 .readMore .hidden {
   visibility: hidden;
 }
+
 .readMore .material-icons {
   font-family: "Material Icons";
-  font-weight: bold;
+  font-weight: 900;
   vertical-align: middle;
   font-style: normal;
   text-align: center;
   font-size: 11px;
   display: inline-block;
-  line-height: 0.8;
+  line-height: 1.5em;
   text-transform: none;
   letter-spacing: normal;
   word-wrap: normal;
@@ -284,6 +308,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: "liga";
 }
+
 .readMore.btn {
   position: relative;
   display: block;
@@ -303,12 +328,15 @@ export default {
   transition: background-color 0.3s;
   padding: 5px 12px;
 }
+
 .readMore.btn:hover {
   background-color: #ccc;
 }
+
 .readMore.btn > * {
   position: relative;
 }
+
 .readMore.btn:before {
   content: "";
   position: absolute;
@@ -318,29 +346,34 @@ export default {
   width: 0;
   padding-top: 0;
   border-radius: 100%;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(236, 240, 241, 0.3);
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
+
 .readMore.btn:active:before {
   width: 120%;
   padding-top: 120%;
   transition: width 0.2s ease-out, padding-top 0.2s ease-out;
 }
+
 .readMore.btn .wordCount {
   font-weight: 400;
   color: #555;
 }
+
 .center {
   margin: 5px auto;
 }
+
 .right {
   float: right;
   margin-bottom: 45px;
 }
+
 .left {
   float: left;
   margin-bottom: 45px;

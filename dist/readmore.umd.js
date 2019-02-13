@@ -59,13 +59,21 @@
         type: String,
         default: "Content Not Defined"
       },
-      readMore: {
+      readMoreText: {
         type: String,
         default: "Read More"
       },
-      readLess: {
+      readLessText: {
         type: String,
         default: "Read Less"
+      },
+      readMoreIcon: {
+        type: String,
+        default: "arrow_drop_down"
+      },
+      readLessIcon: {
+        type: String,
+        default: "arrow_drop_up"
       },
       height: {
         type: Number,
@@ -134,7 +142,9 @@
        * One way to get a unique id -- the component's own interal id. But folks say to avoid this.
        */
       //this.id = this._uid;
+
       this.id = this.create_UUID();
+
       this.$nextTick(function () {
         var sectionHeight = document.getElementById(this$1.id).scrollHeight;
         this$1.sectionHeight = sectionHeight;
@@ -144,6 +154,7 @@
           this$1.removeFade = true;
         }
       });
+
       this.handleClicks();
     },
     methods: {
@@ -208,31 +219,39 @@
         var this$1 = this;
 
         var sectionHeight = element.scrollHeight;
+
         var elementTransition = element.style.transition;
         element.style.transition = "";
+
         requestAnimationFrame(function () {
           element.style.height = sectionHeight + "px";
           element.style.transition = elementTransition;
+
           requestAnimationFrame(function () {
             element.style.height = this$1.height + "px";
           });
         });
+
         element.setAttribute("data-collapsed", "true");
       },
       expandSection: function expandSection(element) {
         var sectionHeight = element.scrollHeight;
+
         element.style.height = sectionHeight + "px";
+
         element.addEventListener(
           "transitionend",
           this.y(function (callee) {
             element.removeEventListener("transitionend", callee);
           })
         );
+
         element.setAttribute("data-collapsed", "false");
       },
       toggle: function toggle() {
         var section = document.getElementById(this.id);
         var isCollapsed = section.getAttribute("data-collapsed") === "true";
+
         if (isCollapsed) {
           this.expandSection(section);
           section.setAttribute("data-collapsed", "false");
@@ -387,13 +406,13 @@
         (!this.isCollapsed && this.hideReadLess) || this.hideButton
           ? false
           : true
-      )?_c('div',{staticClass:"mt-0",class:_vm.triggerClass},[_c('button',{staticClass:"readMore btn",class:_vm.triggerPosition,style:({ 'font-size': _vm.triggerFontSize + 'px' }),attrs:{"type":"button"},on:{"click":function($event){return _vm.toggle()}}},[_c('span',[_vm._v("\n        "+_vm._s(this.isCollapsed ? this.readMore : this.readLess)+"\n        "),(_vm.isCollapsed && _vm.showWordCount ? true : false)?_c('span',{staticClass:"wordCount"},[_vm._v("  "+_vm._s(_vm.getWordCount)+" total words")]):_vm._e()])])]):_vm._e()])};
+      )?_c('div',{staticClass:"mt-0",class:_vm.triggerClass},[_c('button',{staticClass:"readMore btn",class:_vm.triggerPosition,style:({ 'font-size': _vm.triggerFontSize + 'px' }),attrs:{"type":"button"},on:{"click":function($event){return _vm.toggle()}}},[_c('span',[_vm._v("\n        "+_vm._s(this.isCollapsed ? this.readMoreText : this.readLessText)+"\n        "),(_vm.isCollapsed && _vm.showWordCount ? true : false)?_c('span',{staticClass:"wordCount"},[_vm._v("  "+_vm._s(_vm.getWordCount)+" total words")]):_vm._e()]),_vm._v(" \n      "),_c('i',{staticClass:"material-icons"},[_vm._v("\n        "+_vm._s(this.isCollapsed ? this.readMoreIcon : this.readLessIcon)+"\n      ")])])]):_vm._e()])};
   var __vue_staticRenderFns__ = [];
 
     /* style */
     var __vue_inject_styles__ = function (inject) {
       if (!inject) { return }
-      inject("data-v-085d9f2a_0", { source: ".readMore .section{overflow:hidden;height:auto;position:relative;z-index:0;font-size:16px;clear:both;margin-top:0}.readMore .fade{position:relative}.readMore .fade:after{content:\"\";position:absolute;z-index:1;bottom:0;left:0;pointer-events:none;background-image:linear-gradient(to bottom,rgba(255,255,255,0),#fff 60%);width:100%;height:4em}.readMore .hidden{visibility:hidden}.readMore .material-icons{font-family:\"Material Icons\";font-weight:700;vertical-align:middle;font-style:normal;text-align:center;font-size:11px;display:inline-block;line-height:.8;text-transform:none;letter-spacing:normal;word-wrap:normal;white-space:nowrap;direction:ltr;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;-moz-osx-font-smoothing:grayscale;font-feature-settings:\"liga\"}.readMore.btn{position:relative;display:block;padding:0;overflow:hidden;border-width:0;outline:0;border-radius:2px;box-shadow:0 1px 4px rgba(0,0,0,.6);background-color:#fff;color:#333;font-weight:900;text-transform:uppercase;transition:background-color .3s;padding:5px 12px}.readMore.btn:hover{background-color:#ccc}.readMore.btn>*{position:relative}.readMore.btn:before{content:\"\";position:absolute;top:50%;left:50%;display:block;width:0;padding-top:0;border-radius:100%;background-color:rgba(255,255,255,.3);-webkit-transform:translate(-50%,-50%);-moz-transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%);-o-transform:translate(-50%,-50%);transform:translate(-50%,-50%)}.readMore.btn:active:before{width:120%;padding-top:120%;transition:width .2s ease-out,padding-top .2s ease-out}.readMore.btn .wordCount{font-weight:400;color:#555}.center{margin:5px auto}.right{float:right;margin-bottom:45px}.left{float:left;margin-bottom:45px}", map: undefined, media: undefined });
+      inject("data-v-326e08af_0", { source: ".readMore .section{overflow:hidden;height:auto;position:relative;z-index:0;font-size:16px;clear:both;margin-top:0}.readMore .fade{position:relative}.readMore .fade:after{content:\"\";position:absolute;z-index:1;bottom:0;left:0;pointer-events:none;background-image:linear-gradient(to bottom,rgba(255,255,255,0),#fff 60%);width:100%;height:4em}.readMore .hidden{visibility:hidden}.readMore .material-icons{font-family:\"Material Icons\";font-weight:900;vertical-align:middle;font-style:normal;text-align:center;font-size:11px;display:inline-block;line-height:1.5em;text-transform:none;letter-spacing:normal;word-wrap:normal;white-space:nowrap;direction:ltr;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;-moz-osx-font-smoothing:grayscale;font-feature-settings:\"liga\"}.readMore.btn{position:relative;display:block;padding:0;overflow:hidden;border-width:0;outline:0;border-radius:2px;box-shadow:0 1px 4px rgba(0,0,0,.6);background-color:#fff;color:#333;font-weight:900;text-transform:uppercase;transition:background-color .3s;padding:5px 12px}.readMore.btn:hover{background-color:#ccc}.readMore.btn>*{position:relative}.readMore.btn:before{content:\"\";position:absolute;top:50%;left:50%;display:block;width:0;padding-top:0;border-radius:100%;background-color:rgba(236,240,241,.3);-webkit-transform:translate(-50%,-50%);-moz-transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%);-o-transform:translate(-50%,-50%);transform:translate(-50%,-50%)}.readMore.btn:active:before{width:120%;padding-top:120%;transition:width .2s ease-out,padding-top .2s ease-out}.readMore.btn .wordCount{font-weight:400;color:#555}.center{margin:5px auto}.right{float:right;margin-bottom:45px}.left{float:left;margin-bottom:45px}", map: undefined, media: undefined });
 
     };
     /* scoped */
