@@ -1,6 +1,6 @@
 {
   "name": "vue-readmore-readless",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Simple read-more / read-less for Vue",
   "license": "MIT",
   "main": "dist/readmore.umd.js",
