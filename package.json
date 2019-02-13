@@ -1,8 +1,11 @@
 {
-  "name": "vue-readmore",
-  "version": "1.0.0",
-  "description": "",
+  "name": "vue-readmore-readless",
+  "version": "1.0.1",
+  "description": "Simple read-more / read-less for Vue",
+  "license": "MIT",
   "main": "dist/readmore.umd.js",
+  "author": "Christopher Schweda",
+  "repository": "https://github.com/ICJIA/vue-readmore",
   "module": "dist/readmore.esm.js",
   "unpkg": "dist/readmore.min.js",
   "browser": {
@@ -12,6 +15,9 @@
     "dist/*",
     "src/*"
   ],
+  "engines": {
+    "node": ">=7.8.0"
+  },
   "scripts": {
     "build": "npm run build:unpkg & npm run build:es & npm run build:umd",
     "build:umd": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format umd --file dist/readmore.umd.js",
